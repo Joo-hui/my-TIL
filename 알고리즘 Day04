@@ -1,0 +1,106 @@
+# 문자열 다루기 기본
+
+문제 설명
+
+문자열 s의 길이가 4 혹은 6이고, 숫자로만 구성돼있는지 확인해주는 함수, solution을 완성하세요. 예를 들어 s가 "a234"이면 False를 리턴하고 "1234"라면 True를 리턴하면 됩니다.
+
+제한 사항
+s는 길이 1 이상, 길이 8 이하인 문자열입니다.
+입출력 예
+array의 각 element 중 divisor로 나누어 떨어지는 값을 오름차순으로 정렬한 배열을 반환하는 함수, solution을 작성해주세요.
+divisor로 나누어 떨어지는 element가 하나도 없다면 배열에 -1을 담아 반환하세요.
+
+제한사항
+arr은 자연수를 담은 배열입니다.
+정수 i, j에 대해 i ≠ j 이면 arr[i] ≠ arr[j] 입니다.
+divisor는 자연수입니다.
+array는 길이 1 이상인 배열입니다.
+입출력 예
+
+ 
+
+#풀이
+
+class Solution {
+    public boolean solution(String s) {
+        boolean answer = true;
+        char temp;                       
+        for(int i = 0; i < s.length(); i++){   // String의 길이만큼 반복
+            temp = s.charAt(i);                  // temp에 캐릭터 형태로 저장
+            if(48 <= temp && 57 >= temp){  // 아스키코드 숫자 0(48) 보다 크거나 같고  숫자 9(57) 보다 작거나 같다면 
+                answer = true;                // true
+            } else {                    //아니면
+                answer = false;          //false
+                break;
+            }
+        }
+        return answer;
+    }
+}
+
+ 
+
+# 서울에서 김서방 찾기
+
+문제 설명
+
+String형 배열 seoul의 element중 "Kim"의 위치 x를 찾아, "김서방은 x에 있다"는 String을 반환하는 함수, solution을 완성하세요. seoul에 "Kim"은 오직 한 번만 나타나며 잘못된 값이 입력되는 경우는 없습니다.
+
+제한 사항
+seoul은 길이 1 이상, 1000 이하인 배열입니다.
+seoul의 원소는 길이 1 이상, 20 이하인 문자열입니다.
+"Kim"은 반드시 seoul 안에 포함되어 있습니다.
+입출력 예
+ 
+
+
+ 
+
+# 풀이
+
+ 
+
+class Solution {
+    public String solution(String[] seoul) {
+        String answer = "";
+        String tmp = "Kim";
+        for(int i = 0; i < seoul.length; i++){
+            if(seoul[i].equals(tmp)){
+                answer = "김서방은 " + i + "에 있다";
+                break;
+            } 
+        }
+        return answer;
+    }
+}
+
+ 
+
+# 수박수박수박수박수박수?
+
+문제 설명
+
+길이가 n이고, "수박수박수박수...."와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 예를들어 n이 4이면 "수박수박"을 리턴하고 3이라면 "수박수"를 리턴하면 됩니다.
+
+제한 조건
+n은 길이 10,000이하인 자연수입니다.
+입출력 예
+
+# 풀이
+
+class Solution {
+    public String solution(int n) {
+        String answer = "";
+        String su = "수";
+        String bak = "박";
+        for(int i = 0; i < n; i++ ) {
+         if(i % 2 == 0) {
+         answer = answer.concat(su);
+         }
+         else {
+         answer = answer.concat(bak);
+         }
+        }
+        return answer;
+    }
+}
