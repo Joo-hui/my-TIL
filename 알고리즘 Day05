@@ -1,0 +1,245 @@
+#항해99 Day10
+
+알고리즘 주차긴 하지만 내일까지 내야하는 주특기 과제 때문에 알고리즘에 오늘의 시간을 전부 할애하지 못 했다.
+
+그렇다고 과제가 해결된 것도 아니고..
+
+오늘은 이도저도 아닌 하루를 보낸것 같다.
+
+참고 자료를 줘서 봤지만 봤는데도 불구하고 여전히 방향을 못 잡겠다. 어떻게 해야 하는거야!!!!😬
+
+기술 매니저님 게더 순회 하실때 과제 미제출 또는 미완정으로 제출 시 차주에 있는 주특기 주차에서 불이익이 있는지 여쭤 봤는데 없다고는 했다. 근데 그 뭐랄까 남들 다 내는 과제를 못 하는 것에 대한 찝찝함 + 내 자신의 무능함? 
+
+지금 시간이 되니까 내일 있을 알고리즘 시험도 이젠 걱정이다. 마찬가지로 패스 못 할 경우 그냥 매니저님과 1:1 면담이라고는 되어있지만............. 그 그그그그그그 내 마음 속 찝찝함 + 나만 못 함 + 나만 뒤쳐지나? 하는 그런..
+
+내일 오전에 있는 CS스터디 내용도 읽어야 하는데 왜 벌써 새벽 1시가 다 되어 가는거냐고😭
+
+
+
+아무튼 오늘은 알고리즘 푼거(라고 쓰고 해설 보고 참고 한거라고 읽는다).
+
+
+
+# 완주하지 못한 선수
+
+
+
+문제 설명
+
+수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.
+
+마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.
+
+제한사항
+마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다.
+completion의 길이는 participant의 길이보다 1 작습니다.
+참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
+참가자 중에는 동명이인이 있을 수 있습니다.
+입출력 예
+
+입출력 예 설명
+
+예제 #1
+"leo"는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.
+
+예제 #2
+"vinko"는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.
+
+예제 #3
+"mislav"는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.
+
+
+
+#풀이
+
+import java.util.*;
+
+class Solution {
+    public String solution(String[] participant, String[] completion) {
+        String answer = "";
+        Arrays.sort(participant);
+        Arrays.sort(completion);
+        
+        
+        for(int i = 0; i < completion.length; i++){
+            if(!participant[i].equals(completion[i])){
+                answer = participant[i];
+                break;
+            }
+        }
+        
+        if(answer == "") {
+            answer = participant[participant.length-1];
+        }
+        return answer;
+    }
+}
+
+# 이상한 문자 만들기
+
+문제 설명
+
+문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다. 각 단어의 짝수번째 알파벳은 대문자로, 홀수번째 알파벳은 소문자로 바꾼 문자열을 리턴하는 함수, solution을 완성하세요.
+
+제한 사항
+문자열 전체의 짝/홀수 인덱스가 아니라, 단어(공백을 기준)별로 짝/홀수 인덱스를 판단해야합니다.
+첫 번째 글자는 0번째 인덱스로 보아 짝수번째 알파벳으로 처리해야 합니다.
+입출력 예
+
+입출력 예 설명
+
+"try hello world"는 세 단어 "try", "hello", "world"로 구성되어 있습니다. 각 단어의 짝수번째 문자를 대문자로, 홀수번째 문자를 소문자로 바꾸면 "TrY", "HeLlO", "WoRlD"입니다. 따라서 "TrY HeLlO WoRlD" 를 리턴합니다.
+
+
+
+# 풀이
+
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+        int count = 1;
+        for(int i = 0; i < s.length(); i++) {
+            String temp = s.substring(i, i + 1);
+            char a = s.charAt(i);
+            if(a >= 65 && a <= 122){
+                if(count %2 == 1){
+                    answer += temp.toUpperCase();
+                }else{
+                    answer += temp.toLowerCase();
+                }
+            }
+            if(a == 32) {
+                count = 0;
+                answer += temp;
+            }
+            count++;
+        }
+        return answer;
+    }
+}
+
+# 자릿수 더하기
+
+문제 설명
+
+자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+
+제한사항
+N의 범위 : 100,000,000 이하의 자연수
+입출력 예
+
+
+입출력 예 설명
+
+입출력 예 #1
+문제의 예시와 같습니다.
+
+입출력 예 #2
+9 + 8 + 7 = 24이므로 24를 return 하면 됩니다.
+
+
+
+# 풀이
+
+
+
+import java.util.*;
+
+public class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        String s = String.valueOf(n);
+        
+        for(int i = 0; i < s.length(); i++){
+            answer += Integer.parseInt(s.substring(i, i+1));
+            
+            
+        }
+        
+        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
+        System.out.println("Hello Java");
+
+        return answer;
+    }
+}
+
+
+
+# 자연수 뒤집어 배열로 만들기
+
+문제 설명
+
+자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요. 예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
+
+제한 조건
+n은 10,000,000,000이하인 자연수입니다.
+입출력 예
+
+
+
+# 풀이
+
+import java.util.*;
+class Solution {
+    public int[] solution(long n) {
+   
+
+        //int[] answer = ;
+    
+        String s = String.valueOf(n);
+        int[] temp = new int[s.length()];
+         int[] answer = new int[s.length()];
+        
+        for(int i = 0; i < s.length(); i++){
+            temp[i] = Integer.parseInt(s.substring(i, i+1));
+        }
+        
+        int i = 0;
+        int a = 0;
+            for(i = s.length()-1; i >= 0; i--){
+                answer[a] = temp[i];
+                a++;
+            }
+        
+        return answer;
+    }
+}
+
+# 정수 제곱근 판별
+
+임의의 양의 정수 n에 대해, n이 어떤 양의 정수 x의 제곱인지 아닌지 판단하려 합니다.
+n이 양의 정수 x의 제곱이라면 x+1의 제곱을 리턴하고, n이 양의 정수 x의 제곱이 아니라면 -1을 리턴하는 함수를 완성하세요.
+
+제한 사항
+n은 1이상, 50000000000000 이하인 양의 정수입니다.
+입출력 예
+
+입출력 예 설명
+입출력 예#1
+121은 양의 정수 11의 제곱이므로, (11+1)를 제곱한 144를 리턴합니다.
+
+입출력 예#2
+3은 양의 정수의 제곱이 아니므로, -1을 리턴합니다.
+
+# 풀이
+
+
+
+class Solution {
+    public long solution(long n) {
+        long answer = 0;
+        
+        if(Math.sqrt(n) % 1 == 0) {
+            answer = (long)((Math.sqrt(n) + 1) * (Math.sqrt(n) + 1));
+        }else {
+            answer = -1;
+        }
+        return answer;
+    }
+}
+
+
+
+Math.sqrt()                      : 숫자의 제곱근을 반환하는 함수
+Integer.parserInt()              : String을 int형 10진수로 바꿔준다.
